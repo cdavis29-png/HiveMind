@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 @TeleOp(name="TeleOp")
@@ -9,6 +10,7 @@ public class HiveMindTeleOp extends LinearOpMode {
     Hardware robot;
 
     Gamepad main;
+    static final int MOTOR_TICK_COUNTS = 0; // Look for actual tick count at some point
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -19,11 +21,9 @@ public class HiveMindTeleOp extends LinearOpMode {
         // robot.setMode(Hardware.RunMode.FIELD_CENTRIC);
 
         waitForStart();
-        double ratio = 19.2;
-        double rpm = 312;
-        double diameter = 18;
-        double motorSpeed = getMotorSpeed(ratio, rpm, diameter, 0);
-        driveDistance(24, motorSpeed, 50);
+        double diameter = 3;
+        double circumference = diameter * 3.14159265;
+        driveDistance(circumference, 24, 0.5);
         while (opModeIsActive() && !isStopRequested()) {
             main.copy(gamepad1);
 
@@ -34,22 +34,42 @@ public class HiveMindTeleOp extends LinearOpMode {
             robot.drive(x, y, rx);
         }
     }
-    private double getMotorSpeed(double ratio, double rpm, double diameter, double motorSpeed){
-        motorSpeed = (ratio * rpm * diameter * 3.1415926535)/60;
-        return motorSpeed;
+    private void resetEncoder(){
+        robot.frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
-    public void driveDistance(double distance, double motorSpeed, double speed){
-        double startTime = System.currentTimeMillis();
-        double driveTime = ((Math.abs(distance)) / motorSpeed)*(1 / (0.01 * speed));
-        if (distance < 0) {
-            robot.setMotorPowers(-1*speed/100);
+    private void setTargetPosition(int encoderDrivingTarget){
+        robot.frontLeft.setTargetPosition(encoderDrivingTarget);
+        robot.frontRight.setTargetPosition(encoderDrivingTarget);
+        robot.backLeft.setTargetPosition(encoderDrivingTarget);
+        robot.backRight.setTargetPosition(encoderDrivingTarget);
+    }
+    private void isDrivingSetAmount(){
+        while (robot.backLeft.isBusy() || robot.backRight.isBusy() || robot.frontLeft.isBusy() || robot.frontRight.isBusy()){
+            boolean isTrue = true;
         }
-        else{
-            robot.setMotorPowers(1*speed/100);
+    }
+    private void runToPosition(){
+        robot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        isDrivingSetAmount();
+    }
+    public void driveDistance(double circumference, double distance, double power){
+        resetEncoder();
+        double requiredRotations = distance / circumference;
+        int encoderDrivingTarget = (int)(requiredRotations*MOTOR_TICK_COUNTS);
+        setTargetPosition(encoderDrivingTarget);
+        if (distance > 0) {
+            robot.setMotorPowers(power / 100);
         }
-        while ((System.currentTimeMillis() - startTime) < driveTime){
-            boolean isMoving = true;
+        else if (distance < 0){
+            robot.setMotorPowers(-1*power/100);
         }
+        runToPosition();
         robot.setMotorPowers(0);
     }
 }
