@@ -10,7 +10,7 @@ public class HiveMindTeleOp extends LinearOpMode {
     Hardware robot;
 
     Gamepad main;
-    static final int MOTOR_TICK_COUNTS = 0; // Look for actual tick count at some point
+    static final int MOTOR_TICK_COUNTS = 5377; // Is 10x actual number because ints can't be a decimal...
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -21,7 +21,7 @@ public class HiveMindTeleOp extends LinearOpMode {
         // robot.setMode(Hardware.RunMode.FIELD_CENTRIC);
 
         waitForStart();
-        double diameter = 3;
+        double diameter = 3.7;
         double circumference = diameter * 3.14159265;
         driveDistance(circumference, 24, 0.5);
         while (opModeIsActive() && !isStopRequested()) {
@@ -61,7 +61,7 @@ public class HiveMindTeleOp extends LinearOpMode {
     public void driveDistance(double circumference, double distance, double power){
         resetEncoder();
         double requiredRotations = distance / circumference;
-        int encoderDrivingTarget = (int)(requiredRotations*MOTOR_TICK_COUNTS);
+        int encoderDrivingTarget = (int)(requiredRotations*MOTOR_TICK_COUNTS/10);
         setTargetPosition(encoderDrivingTarget);
         if (distance > 0) {
             robot.setMotorPowers(power / 100);
