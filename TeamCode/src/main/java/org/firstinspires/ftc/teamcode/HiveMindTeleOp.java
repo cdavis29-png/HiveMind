@@ -97,7 +97,7 @@ public class HiveMindTeleOp extends LinearOpMode {
         }
         robot.flywheel.setPower(0);
     }*/
-    public void turnsetDegrees(double degrees, double power){
+    public void turnSetDegrees(double degrees, double power){
         resetEncoder();
         int encoderTurningTarget = (int)(degrees*MOTOR_TICK_COUNTS/360); // Degrees to turn
         robot.frontLeft.setTargetPosition(encoderTurningTarget);
