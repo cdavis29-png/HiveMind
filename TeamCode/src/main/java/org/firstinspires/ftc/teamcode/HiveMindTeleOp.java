@@ -27,7 +27,7 @@ public class HiveMindTeleOp extends LinearOpMode {
         double diameter = 3.7;
         double circumference = diameter * 3.14159265;
         driveDistance(circumference, 24, 0.5);
-        turnsetDegrees(90, 0.5);
+        turnSetDegrees(90, 0.5);
         while (opModeIsActive() && !isStopRequested()) {
             main.copy(gamepad1);
 
@@ -120,7 +120,6 @@ public class HiveMindTeleOp extends LinearOpMode {
         robot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
     }
 
 }
