@@ -26,8 +26,10 @@ public class HiveMindTeleOp extends LinearOpMode {
         waitForStart();
         double diameter = 3.7;
         double circumference = diameter * 3.14159265;
-        driveDistance(circumference, 24, 0.5);
-        turnSetDegrees(90, 0.5);
+        driveDistance(circumference, 48, 0.5);
+        turnSetDegrees(45, 0.5);
+        shoot;
+
         while (opModeIsActive() && !isStopRequested()) {
             main.copy(gamepad1);
 
@@ -81,12 +83,14 @@ public class HiveMindTeleOp extends LinearOpMode {
         robot.setMotorPowers(0);
     }
 
-    /*public void turnFlyWheel(double degrees, double power){
+    public void turnFlyWheel(double degrees, double power){
         resetEncoder();
         int encoderTurningTarget = (int)(degrees*MOTOR_TICK_COUNTS/360);
-        robot.flywheel.setTargetPosition(encoderTurningTarget);
+        robot.flywheel1.setTargetPosition(encoderTurningTarget);
+        robot.flywheel2.setTargetPosition(encoderTurningTarget/8);
         if (degrees > 0){
-            robot.flywheel.setPower(1*power/100);
+            robot.flywheel1.setPower(1*power/100);
+
         }
         else{
             robot.flywheel.setPower(-1*power/100);
@@ -96,7 +100,7 @@ public class HiveMindTeleOp extends LinearOpMode {
             boolean isTrue = true;
         }
         robot.flywheel.setPower(0);
-    }*/
+    }
     public void turnSetDegrees(double degrees, double power){
         resetEncoder();
         int encoderTurningTarget = (int)(degrees*MOTOR_TICK_COUNTS/360); // Degrees to turn
@@ -120,6 +124,8 @@ public class HiveMindTeleOp extends LinearOpMode {
         robot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        isDrivingSetAmount();
+        robot.setMotorPowers(0);
     }
 
 }
