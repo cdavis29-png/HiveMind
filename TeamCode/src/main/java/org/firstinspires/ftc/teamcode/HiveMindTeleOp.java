@@ -26,9 +26,7 @@ public class HiveMindTeleOp extends LinearOpMode {
         waitForStart();
         double diameter = 3.7;
         double circumference = diameter * 3.14159265;
-        driveDistance(circumference, 48, 0.5);
-        turnSetDegrees(45, 0.5);
-        shoot;
+
 
         while (opModeIsActive() && !isStopRequested()) {
             main.copy(gamepad1);
@@ -100,6 +98,13 @@ public class HiveMindTeleOp extends LinearOpMode {
             boolean isTrue = true;
         }
         robot.flywheel.setPower(0);
+    }
+    public void startIntake(double power){
+        robot.intake1.setPower(1*power/100);
+
+        }
+        intake1.setPower(power);
+        intake2.setPower(power);
     }
     public void turnSetDegrees(double degrees, double power){
         resetEncoder();
