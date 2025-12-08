@@ -1,8 +1,9 @@
+
 package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.teamcode.Constants.*;
 
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+        import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
@@ -16,6 +17,11 @@ public class Hardware {
     public DcMotor backLeft; // 2
     public DcMotor frontRight; // 1
     public DcMotor backRight; // 0
+
+    public DcMotor flywheel1;
+    public DcMotor flywheel2;
+    public DcMotor intake1;
+    public DcMotor intake2;
 
     public IMU imu;
 
