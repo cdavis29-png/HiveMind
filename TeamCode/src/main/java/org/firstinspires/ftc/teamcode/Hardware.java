@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import static org.firstinspires.ftc.teamcode.Constants.*;
 
         import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;

@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="TeleOp")
 public class General extends LinearOpMode {
     Hardware robot;
     ElapsedTime flyWheelTimer = new ElapsedTime();
@@ -52,7 +52,7 @@ public class General extends LinearOpMode {
         robot.backRight.setMode(mode);
     }
 
-    public void driveDistance(double circumference, double distance, double power) {
+    public void driveDistance(double distance, double power) {
         resetEncoder();
 
         double requiredRotations = distance / circumference;
