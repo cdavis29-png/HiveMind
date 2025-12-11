@@ -14,7 +14,7 @@ public class General extends LinearOpMode {
     Gamepad main;
     static final int MOTOR_TICK_COUNTS = 538; // Encoder ticks per second, actual value is 537.7
     double singleShotTime = 0; // Change this once we figure out the actual time
-
+    long loadTime = 100; // Change this once we figure out the actual time
     @Override
     public void runOpMode() throws InterruptedException {
         robot = new Hardware(hardwareMap);
@@ -89,10 +89,13 @@ public class General extends LinearOpMode {
     }
 
     public void startIntake(double power) {
-        robot.intake1.setPower(power / 100);
+        robot.intake1.setPower(power/100);
         robot.intake2.setPower(power/100);
     }
-
+    public void stopIntake(){
+        robot.intake1.setPower(0);
+        robot.intake2.setPower(0);
+    }
     public void turnSetDegrees(double degrees, double power){
         resetEncoder();
         int encoderTurningTarget = (int)(degrees*MOTOR_TICK_COUNTS/360); // Degrees to turn

@@ -21,6 +21,7 @@ public class HiveMindTeleOp extends General {
         // robot.setMode(Hardware.RunMode.FIELD_CENTRIC);
 
         waitForStart();
+        startIntake(1);
         teleOpTimer.reset();
 
 
@@ -34,5 +35,6 @@ public class HiveMindTeleOp extends General {
             robot.drive(x, y, rx);
         }
         teleOpTimer.reset();
+        stopIntake();
     }
 }

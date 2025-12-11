@@ -30,14 +30,17 @@ public class auto extends General
         waitForStart();
         autoTimer.reset();
         startIntake(1);
+        driveToLoadingZone();
+        Thread.sleep(loadTime);
         while (autoTimer.time() < 30){
-            driveToLoadingZone();
-            // sleep for however long it takes to load stuff
             driveBackFromLoadingZone();
             driveToTheGoal();
-            driveBackFromGoal();
             shoot3times();
+            driveBackFromGoal();
+            driveToLoadingZone();
+            Thread.sleep(loadTime);
         }
+        stopIntake();
         autoTimer.reset();
     }
     public void shoot() {
