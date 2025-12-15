@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+
 public class General extends LinearOpMode {
     Hardware robot;
     ElapsedTime flyWheelTimer = new ElapsedTime();
@@ -14,7 +15,7 @@ public class General extends LinearOpMode {
     Gamepad main;
     static final int MOTOR_TICK_COUNTS = 538; // Encoder ticks per second, actual value is 537.7
     double singleShotTime = 0; // Change this once we figure out the actual time
-    long loadTime = 100; // Change this once we figure out the actual time
+    long loadTime = 1500; // Change this once we figure out the actual time
     @Override
     public void runOpMode() throws InterruptedException {
         robot = new Hardware(hardwareMap);
@@ -41,7 +42,7 @@ public class General extends LinearOpMode {
 
     private void isDrivingSetAmount() {
         while (robot.backLeft.isBusy() || robot.backRight.isBusy() || robot.frontLeft.isBusy() || robot.frontRight.isBusy()) {
-            boolean isTrue = true;
+            idle();
         }
     }
 
@@ -61,7 +62,7 @@ public class General extends LinearOpMode {
         setTargetPosition(encoderDrivingTarget);
         setDrivetrainMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.setMotorPowers(power / 100);
+        robot.setMotorPowers(power / 100.0);
 
         isDrivingSetAmount();
 
@@ -71,17 +72,17 @@ public class General extends LinearOpMode {
 
     public void turnFlyWheel(boolean right, double power){
         if (right){
-            robot.flywheel1.setPower(1*power/100);
-            robot.flywheel2.setPower(-1*power/800);
+            robot.flywheel1.setPower(1*power/100.0);
+            robot.flywheel2.setPower(-1*power/800.0);
 
         }
         else{
-            robot.flywheel1.setPower(-1*power/100);
-            robot.flywheel2.setPower(-1*power/800);
+            robot.flywheel1.setPower(-1*power/100.0);
+            robot.flywheel2.setPower(-1*power/800.0);
         }
         flyWheelTimer.reset();
         while (flyWheelTimer.time() < singleShotTime){
-            boolean isTrue = true;
+            idle();
         }
         flyWheelTimer.reset();
         robot.flywheel1.setPower(0);
@@ -89,8 +90,8 @@ public class General extends LinearOpMode {
     }
 
     public void startIntake(double power) {
-        robot.intake1.setPower(power/100);
-        robot.intake2.setPower(power/100);
+        robot.intake1.setPower(power/100.0);
+        robot.intake2.setPower(power/100.0);
     }
     public void stopIntake(){
         robot.intake1.setPower(0);

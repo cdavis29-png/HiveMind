@@ -11,15 +11,13 @@ public class HiveMindTeleOp extends General {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        robot = new Hardware(hardwareMap);
-        main = new Gamepad();
 
 
         // code to change to field-centric drive
         // robot.setMode(Hardware.RunMode.FIELD_CENTRIC);
 
         waitForStart();
-        startIntake(1);
+        startIntake(100);
         teleOpTimer.reset();
 
 

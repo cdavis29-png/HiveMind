@@ -38,6 +38,18 @@ public class Hardware {
         backLeft = hwMap.get(DcMotor.class, "backLeft");
         frontRight = hwMap.get(DcMotor.class, "frontRight");
         backRight = hwMap.get(DcMotor.class, "backRight");
+        intake1 = hwMap.get(DcMotor.class, "intake1");
+        intake2 = hwMap.get(DcMotor.class, "intake2");
+        flywheel1 = hwMap.get(DcMotor.class, "flywheel1");
+        flywheel2 = hwMap.get(DcMotor.class, "flywheel2");
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        flywheel1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        flywheel2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // reverse the left-side drive motors
         frontLeft.setDirection(DcMotor.Direction.REVERSE);

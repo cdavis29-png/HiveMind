@@ -16,16 +16,14 @@ public class Auto extends General
     @Override
     public void runOpMode() throws InterruptedException {
 
-        robot = new Hardware(hardwareMap);
-        main = new Gamepad();
         // code to change to field-centric drive
         // robot.setMode(Hardware.RunMode.FIELD_CENTRIC);
 
         waitForStart();
         autoTimer.reset();
-        startIntake(1);
+        startIntake(100);
         driveToLoadingZone();
-        Thread.sleep(loadTime);
+        Thread.sleep(loadTime*2);
         while (autoTimer.time() < 30){
             driveBackFromLoadingZone();
             driveToTheGoal();
